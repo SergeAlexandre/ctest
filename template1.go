@@ -2,7 +2,7 @@ package main
 
 
 var template1 = `
-#!/usr/bin/env bats
+#!/usr/bin/env bash
 
 echo "=========================== {{.Name}}"
 
@@ -14,6 +14,9 @@ appendFailed() {
   msg="$1/$2: $3"
   echo "FAILED: $msg"
   failed+=("$msg")
+{{- if .ExitOnFail }}
+  exit 1
+{{- end }}
 }
 
 
@@ -71,7 +74,7 @@ tearDown
 {{- end}}
 
 echo ""
-echo "${#failed[@]} failure(s)"
+echo "${#failed[@]} failure(s) on {{ .Name }}:"
 
 printf '%s\n' "${failed[@]}"
 

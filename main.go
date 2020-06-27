@@ -15,6 +15,7 @@ type Ctest struct {
 	GlobalTearDown []string	`yaml:"globalTearDown"`
 	Setup []string			`yaml:"setup"`
 	TearDown[] string		`yaml:"tearDown"`
+	ExitOnFail bool 	    `yaml:"exitOnFail"`
 	Tests []struct {
 		Name string `yaml:"name"`
 		Steps []struct {
@@ -61,13 +62,6 @@ func main() {
 		os.Exit(5)
 	}
 
-	//fmt.Printf("%+v\n", ctest)
-	//tmplName := "template1.tmpl"
-	//tmpl, err := template.New(tmplName).ParseFiles(tmplName)
-	//if err != nil {
-	//	fmt.Printf("Error reading '%s' as Template file: %s\n", tmplName, err)
-	//	os.Exit(2)
-	//}
 
 	tmpl, err := template.New("template1").Parse(template1)
 	if err != nil {
